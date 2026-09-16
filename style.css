@@ -1,0 +1,134 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800&display=swap');
+
+:root {
+  --pin-red: #E60023;
+  --pin-red-hover: #AD081C;
+  --pin-black: #111111;
+  --pin-gray-bg: #EFEFEF;
+  --pin-gray-btn: #F7F7F7;
+  --pin-gray-hover: #E2E2E2;
+  --pin-text-muted: #5F5F5F;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--pin-gray-bg);
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
+}
+
+.board {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--pin-black);
+  font-weight: 800;
+  font-size: 1.1rem;
+}
+
+.brand-badge {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--pin-red);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 1rem;
+}
+
+.pin-card {
+  background: #ffffff;
+  border-radius: 32px;
+  padding: 22px;
+  width: 300px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08), 0 12px 28px rgba(0,0,0,0.10);
+}
+
+/* экран калькулятора, оформленный как поисковая строка Pinterest */
+.result {
+  background: var(--pin-gray-bg);
+  border-radius: 999px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 22px;
+  margin-bottom: 18px;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--pin-black);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.pad {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.my-btn {
+  border: none;
+  height: 58px;
+  border-radius: 50%;
+  background: var(--pin-gray-btn);
+  color: var(--pin-black);
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
+  font-size: 1.3rem;
+  font-weight: 600;
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.15s ease, transform 0.05s ease;
+}
+
+.my-btn:hover {
+  background: var(--pin-gray-hover);
+}
+
+.my-btn:active {
+  transform: scale(0.96);
+}
+
+.my-btn.secondary {
+  color: var(--pin-text-muted);
+  font-weight: 700;
+}
+
+.my-btn.primary {
+  background: var(--pin-red);
+  color: #ffffff;
+}
+
+.my-btn.primary:hover {
+  background: var(--pin-red-hover);
+}
+
+.my-btn.execute {
+  grid-column: span 2;
+  border-radius: 999px;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+}
+
+.my-btn.zero {
+  grid-column: span 2;
+  border-radius: 999px;
+}
