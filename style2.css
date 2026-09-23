@@ -1,0 +1,380 @@
+/* Пункт 6, 7, 13: два шрифта — Space Grotesk (жирный, для цифр) и Inter (в т.ч. тонкий вес 300) */
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* ===== Пункт 1: новая цветовая палитра (было оранжево-серая -> стала фиолетово-мятная) =====
+   Пункт 2: тёмная тема задана как ЗНАЧЕНИЕ ПО УМОЛЧАНИЮ (data-theme="dark")
+   Пункт 12: переменные для светлой темы лежат в блоке [data-theme="light"] ниже,
+   их подключает JS при клике на кнопку-переключатель */
+:root,
+[data-theme="dark"] {
+  --bg-page: #121218;
+  --bg-card: #1B1B24;
+  --accent: #E60023;          /* фиолетовый — основной акцент */
+  --accent-hover: #AD081C;    /* пункт 8: цвет при наведении ОТЛИЧАЕТСЯ от основного */
+  --btn-bg: #2A2A35;
+  --btn-hover: #34343F;
+  --text-primary: #F5F5F7;    /* пункт 14: новый цвет шрифта (было чёрным) */
+  --text-muted: #9B9BA8;
+  --result-bg: #232330;
+  --result-color: #E60023;    /* пункт 4: отдельный цвет вывода результата — мятный */
+  --mark-bg: rgba(230, 0, 35, 0.25);
+}
+
+[data-theme="light"] {
+  --bg-page: #F4F1FB;
+  --bg-card: #FFFFFF;
+  --accent: #E60023;
+  --accent-hover: #AD081C;
+  --btn-bg: #EDEBF9;
+  --btn-hover: #E1DEF5;
+  --text-primary: #1B1B24;
+  --text-muted: #6B6B7B;
+  --result-bg: #EDEBF9;
+  --result-color: #E60023;
+  --mark-bg: rgba(230, 0, 35, 0.18);
+}
+
+* { box-sizing: border-box; }
+
+/* Пункт 15: фоновое изображение — точечный узор, нарисованный прямо в CSS (SVG),
+   поэтому не пропадёт даже без интернета */
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;      /* пункт 10: калькулятор всегда по центру экрана */
+  justify-content: center;
+  background-color: var(--bg-page);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Ccircle cx='4' cy='4' r='2' fill='%23E60023' fill-opacity='0.18'/%3E%3C/svg%3E");
+  background-size: 40px 40px;
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
+  color: var(--text-primary);
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+.board {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  width: 300px;
+}
+
+.topbar {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-primary);
+  font-weight: 800;
+  font-size: 1.1rem;
+}
+
+.brand-badge {
+  width: 28px;
+  height: 28px;
+  border-radius: 10px;
+  background: var(--accent);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 1rem;
+}
+
+.topbar-actions {
+  display: flex;
+  gap: 8px;
+}
+
+/* Кнопка смены темы (п.12) и кнопка-ссылка на GitHub (п.16) */
+.icon-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  border: none;
+  background: var(--btn-bg);
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.icon-btn:hover {
+  background: var(--btn-hover);
+}
+
+.pin-card {
+  background: var(--bg-card);
+  border-radius: 28px;
+  padding: 22px;
+  width: 100%;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.20), 0 12px 28px rgba(0,0,0,0.25);
+  transition: background-color 0.25s ease;
+}
+
+/* Пункт 17: выпадающий список */
+.select-label {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+
+.my-select {
+  width: 100%;
+  padding: 10px 12px;
+  margin-bottom: 14px;
+  border-radius: 12px;
+  border: 1px solid var(--btn-bg);
+  background: var(--btn-bg);
+  color: var(--text-primary);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+/* Экран вывода результата */
+.result {
+  background: var(--result-bg);
+  border-radius: 20px;         /* пункт 5: скруглённые края окна вывода */
+  height: 84px;                /* пункт 11: увеличенный размер окна вывода (было 64px) */
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 22px;
+  margin-bottom: 18px;
+  font-family: 'Space Grotesk', sans-serif; /* пункт 6: другой шрифт для цифр */
+  font-size: 2.6rem;
+  font-weight: 800;            /* пункт 7: более толстый шрифт */
+  color: var(--result-color);  /* пункт 4: отдельный цвет результата */
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  transition: background-color 0.25s ease;
+}
+
+.pad {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.pad-extra {
+  margin-top: 10px;
+}
+
+/* Пункт 3: КВАДРАТНЫЕ кнопки вместо круглых (было border-radius: 50%) */
+.my-btn {
+  border: none;
+  height: 58px;
+  border-radius: 14px;
+  background: var(--btn-bg);
+  color: var(--text-primary);
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.15s ease, transform 0.05s ease;
+}
+
+.my-btn:hover {
+  background: var(--btn-hover);   /* пункт 8: цвет при наведении отличается от базового */
+}
+
+.my-btn:active {
+  transform: scale(0.96);
+}
+
+.my-btn.secondary {
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.my-btn.primary {
+  background: var(--accent);
+  color: #ffffff;
+}
+
+.my-btn.primary:hover {
+  background: var(--accent-hover);
+}
+
+.my-btn.execute {
+  grid-column: span 2;
+  font-weight: 800;
+  letter-spacing: 0.2px;
+}
+
+.my-btn.zero {
+  grid-column: span 2;
+}
+
+/* Пункт 18: сворачивающийся блок "Автор" */
+.author-details {
+  width: 100%;
+  background: var(--bg-card);
+  border-radius: 16px;
+  padding: 12px 16px;
+  color: var(--text-primary);
+  font-size: 0.85rem;
+}
+
+.author-details summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.author-details p {
+  margin: 10px 0 0;
+  color: var(--text-muted);
+  font-weight: 300;           /* пункт 13: более тонкий шрифт */
+  line-height: 1.5;
+}
+
+/* Пункт 19: цель работы с выделенными словами через <mark> */
+.purpose {
+  width: 100%;
+  font-size: 0.85rem;
+  font-weight: 300;           /* пункт 13: тонкий шрифт */
+  color: var(--text-muted);
+  line-height: 1.5;
+  text-align: center;
+  margin: 0;
+}
+
+.purpose mark {
+  background: var(--mark-bg);
+  color: var(--result-color);
+  padding: 0 4px;
+  border-radius: 4px;
+}
+
+/* Пункт 9: подпись внизу */
+.footer-caption {
+  font-size: 0.8rem;
+  font-weight: 300;           /* тонкий шрифт */
+  color: var(--text-muted);
+  margin: 0;
+  text-align: center;
+}
+
+/* ===================== ГЛАВНАЯ СТРАНИЦА (index.html) ===================== */
+
+.home-wrap {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background: var(--bg-card);
+  border-radius: 28px;
+  padding: 48px 32px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.20), 0 12px 28px rgba(0,0,0,0.25);
+}
+
+.home-badge {
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  background: var(--accent);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 1.6rem;
+  margin-bottom: 20px;
+}
+
+.home-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 800;
+  font-size: 1.8rem;
+  color: var(--text-primary);
+  margin: 0 0 10px;
+}
+
+.home-desc {
+  font-weight: 300;
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  max-width: 320px;
+  margin: 0 0 32px;
+}
+
+.home-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+/* Кнопка-ссылка "Перейти к калькулятору" */
+.btn-cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 16px;
+  border-radius: 14px;
+  border: none;
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.05s ease;
+}
+
+.btn-cta:active {
+  transform: scale(0.98);
+}
+
+.btn-cta.primary {
+  background: var(--accent);
+  color: #ffffff;
+}
+
+.btn-cta.primary:hover {
+  background: var(--accent-hover);
+}
+
+.btn-cta.secondary {
+  background: var(--btn-bg);
+  color: var(--text-primary);
+}
+
+.btn-cta.secondary:hover {
+  background: var(--btn-hover);
+}
+
+/* Небольшая ссылка "Назад на главную" на странице калькулятора */
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.back-link:hover {
+  color: var(--text-primary);
+}
