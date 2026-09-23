@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Главная</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body data-theme="dark">
+  <div class="board">
+
+    <div class="topbar">
+      <div class="brand"><span class="brand-badge">P</span>Calc</div>
+      <div class="topbar-actions">
+        <button id="theme-toggle" class="icon-btn" title="Сменить тему">🌙</button>
+      </div>
+    </div>
+
+    <div class="home-wrap">
+      <div class="home-badge">P</div>
+      <h1 class="home-title">Онлайн-калькулятор</h1>
+      <p class="home-desc">
+        Простой калькулятор, оформленный в стилистике Pinterest.
+        Умеет складывать, вычитать, умножать и делить.
+      </p>
+
+      <div class="home-actions">
+        <!-- Кнопка перехода на калькулятор -->
+        <a href="calculator.html" class="btn-cta primary">Открыть калькулятор →</a>
+
+        <!-- Кнопка перехода на GitHub (замени ссылку на свой профиль) -->
+        <a href="https://github.com/nytikkk/lr1-html-css-calculator" target="_blank" rel="noopener" class="btn-cta secondary">🎮 Открыть GitHub</a>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    // та же логика переключения темы, что и на странице калькулятора
+    const themeToggle = document.getElementById('theme-toggle');
+    themeToggle.addEventListener('click', () => {
+      const body = document.body;
+      const isDark = body.getAttribute('data-theme') === 'dark';
+      body.setAttribute('data-theme', isDark ? 'light' : 'dark');
+      themeToggle.textContent = isDark ? '☀️' : '🌙';
+    });
+  </script>
+</body>
+</html>
