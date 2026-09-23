@@ -7,11 +7,32 @@
 <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
+<!-- Пункт 2: тёмная тема задана по умолчанию через атрибут data-theme -->
+<body data-theme="dark">
   <div class="board">
-    <div class="brand"><span class="brand-badge">P</span>Calc</div>
+
+    <a href="index.html" class="back-link">← Главная</a>
+
+    <div class="topbar">
+      <div class="brand"><span class="brand-badge">P</span>Calc</div>
+      <div class="topbar-actions">
+        <!-- Пункт 12: кнопка смены темы (переключает light/dark) -->
+        <button id="theme-toggle" class="icon-btn" title="Сменить тему">🌙</button>
+        <!-- Пункт 16: кнопка-ссылка на GitHub (замени href на свой профиль) -->
+        <a href="https://github.com/nytikkk/lr1-html-css-calculator" target="_blank" rel="noopener" class="icon-btn" title="GitHub">🎮</a>
+      </div>
+    </div>
 
     <div class="pin-card">
+
+      <!-- Пункт 17: выпадающий список -->
+      <label class="select-label" for="precision-select">Точность вычислений</label>
+      <select id="precision-select" class="my-select">
+        <option value="0">Целые числа</option>
+        <option value="2" selected>2 знака после запятой</option>
+        <option value="4">4 знака после запятой</option>
+      </select>
+
       <div id="result" class="result">0</div>
 
       <div class="pad">
@@ -40,6 +61,21 @@
         <button id="btn_op_equal" class="my-btn execute primary">=</button>
       </div>
     </div>
+
+    <!-- Пункт 18: сворачивающийся блок с автором -->
+    <details class="author-details">
+      <summary>Автор</summary>
+      <p>ФИО: Гаврилова Анна Павловна<br>Группа: ИБМ3-54Б</p>
+    </details>
+
+    <!-- Пункт 19: цель работы, ключевые слова выделены тегом <mark> -->
+    <p class="purpose">
+      Цель работы: <mark>знакомство</mark> с базовыми инструментами вёрстки веб-страниц —
+      <mark>HTML</mark> и <mark>CSS</mark> — на примере создания калькулятора.
+    </p>
+
+    <!-- Пункт 9: подпись внизу -->
+    <p class="footer-caption">ЛР выполнила: Гаврилова Анна</p>
   </div>
 
   <script src="script.js"></script>
