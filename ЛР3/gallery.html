@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Галерея фотографий</title>
+<link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body data-theme="dark">
+  <div class="board board-wide">
+
+    <a href="index.html" class="back-link">← Главная</a>
+
+    <div class="topbar">
+      <div class="brand"><span class="brand-badge">P</span>Calc</div>
+      <div class="topbar-actions">
+        <button id="theme-toggle" class="icon-btn" title="Сменить тему">🌙</button>
+        <a href="https://github.com/nytikkk/lr1-html-css-calculator" target="_blank" rel="noopener" class="icon-btn" title="GitHub">🎮</a>
+      </div>
+    </div>
+
+    <!-- Сюда JS (main.js -> MainPage) отрисует всю галерею -->
+    <div id="root"></div>
+
+  </div>
+
+  <!-- JS-часть Bootstrap (нужна для интерактивных компонентов вроде модалок/тостов) -->
+  <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Наше приложение. type="module" обязателен — именно он разрешает import/export -->
+  <script type="module" src="main.js"></script>
+
+  <script>
+    // Переключение темы — та же логика, что и на остальных страницах сайта
+    const themeToggle = document.getElementById('theme-toggle');
+    themeToggle.addEventListener('click', () => {
+      const body = document.body;
+      const isDark = body.getAttribute('data-theme') === 'dark';
+      body.setAttribute('data-theme', isDark ? 'light' : 'dark');
+      themeToggle.textContent = isDark ? '☀️' : '🌙';
+    });
+  </script>
+</body>
+</html>

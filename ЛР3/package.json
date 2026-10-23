@@ -1,0 +1,12 @@
+{
+  "name": "pinterest-calculator-lab",
+  "version": "1.0.0",
+  "description": "ЛР1-3: калькулятор, JS-функции и галерея фотографий в стилистике Pinterest",
+  "main": "main.js",
+  "scripts": {},
+  "author": "Гаврилова Анна Павловна, ИБМ3-54Б",
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap": "^5.3.3"
+  }
+}

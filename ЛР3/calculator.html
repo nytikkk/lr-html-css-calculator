@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Калькулятор</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<!-- Пункт 2: тёмная тема задана по умолчанию через атрибут data-theme -->
+<body data-theme="dark">
+  <div class="board">
+
+    <a href="index.html" class="back-link">← Главная</a>
+
+    <div class="topbar">
+      <div class="brand"><span class="brand-badge">P</span>Calc</div>
+      <div class="topbar-actions">
+        <!-- Пункт 12: кнопка смены темы (переключает light/dark) -->
+        <button id="theme-toggle" class="icon-btn" title="Сменить тему">🌙</button>
+        <!-- Пункт 16: кнопка-ссылка на GitHub (замени href на свой профиль) -->
+        <a href="https://github.com/nytikkk/lr1-html-css-calculator" target="_blank" rel="noopener" class="icon-btn" title="GitHub">🎮</a>
+      </div>
+    </div>
+
+    <div class="pin-card">
+
+      <!-- Пункт 17: выпадающий список -->
+      <label class="select-label" for="precision-select">Точность вычислений</label>
+      <select id="precision-select" class="my-select">
+        <option value="0">Целые числа</option>
+        <option value="2" selected>2 знака после запятой</option>
+        <option value="4">4 знака после запятой</option>
+      </select>
+
+      <div id="result" class="result">0</div>
+
+      <div class="pad">
+        <button id="btn_op_clear" class="my-btn secondary">C</button>
+        <button id="btn_op_sign" class="my-btn secondary">+/-</button>
+        <button id="btn_op_percent" class="my-btn secondary">%</button>
+        <button id="btn_op_div" class="my-btn primary">/</button>
+
+        <button id="btn_digit_7" class="my-btn">7</button>
+        <button id="btn_digit_8" class="my-btn">8</button>
+        <button id="btn_digit_9" class="my-btn">9</button>
+        <button id="btn_op_mult" class="my-btn primary">×</button>
+
+        <button id="btn_digit_4" class="my-btn">4</button>
+        <button id="btn_digit_5" class="my-btn">5</button>
+        <button id="btn_digit_6" class="my-btn">6</button>
+        <button id="btn_op_minus" class="my-btn primary">−</button>
+
+        <button id="btn_digit_1" class="my-btn">1</button>
+        <button id="btn_digit_2" class="my-btn">2</button>
+        <button id="btn_digit_3" class="my-btn">3</button>
+        <button id="btn_op_plus" class="my-btn primary">+</button>
+
+        <button id="btn_digit_0" class="my-btn zero">0</button>
+        <button id="btn_digit_dot" class="my-btn">.</button>
+        <button id="btn_op_equal" class="my-btn execute primary">=</button>
+      </div>
+
+      <!-- Новый ряд: задания ЛР2 (раздел "Самостоятельная проработка") -->
+      <div class="pad pad-extra">
+        <button id="btn_op_sqrt" class="my-btn secondary" title="Квадратный корень">√</button>
+        <button id="btn_op_square" class="my-btn secondary" title="Возведение в квадрат">x²</button>
+        <button id="btn_op_factorial" class="my-btn secondary" title="Факториал">x!</button>
+        <button id="btn_op_backspace" class="my-btn secondary" title="Стереть последнюю цифру">⌫</button>
+
+        <button id="btn_op_triplezero" class="my-btn zero" title="Добавить 000">000</button>
+        <button id="btn_op_reciprocal" class="my-btn execute primary" title="Обратное число (1/x)">1/x</button>
+      </div>
+    </div>
+
+    <!-- Пункт 18: сворачивающийся блок с автором -->
+    <details class="author-details">
+      <summary>Автор</summary>
+      <p>ФИО: Гаврилова Анна Павловна<br>Группа: ИБМ3-54Б</p>
+    </details>
+
+    <!-- Пункт 19: цель работы, ключевые слова выделены тегом <mark> -->
+    <p class="purpose">
+      Цель работы: <mark>знакомство</mark> с базовыми инструментами вёрстки веб-страниц —
+      <mark>HTML</mark> и <mark>CSS</mark> — на примере создания калькулятора.
+    </p>
+
+    <!-- Пункт 9: подпись внизу -->
+    <p class="footer-caption">ЛР выполнила: Гаврилова Анна</p>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
