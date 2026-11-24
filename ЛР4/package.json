@@ -1,0 +1,20 @@
+{
+  "name": "lab4-express",
+  "version": "1.0.0",
+  "description": "ЛР4: REST API для карточек на Express.js (слоистая архитектура)",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon --ignore src/data/ src/index.js"
+  },
+  "author": "Гаврилова Анна Павловна, ИБМ3-54Б",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "helmet": "^8.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  }
+}
